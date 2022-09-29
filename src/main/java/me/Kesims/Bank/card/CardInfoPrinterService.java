@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 public class CardInfoPrinterService {
 
     public void printCardInfo(BaseCard card) {
-        System.out.println("Card number: " + card.getCardNumber() + ", expiration: " + card.getExpiration() + ", " + card.getCvc());
+        System.out.println("Card number: " + card.getCardNumber() + ", expiration: " + card.getExpiration() + ", CVC: " + card.getCvc());
     }
 
     public void printAccountCards(BaseAccount account) {

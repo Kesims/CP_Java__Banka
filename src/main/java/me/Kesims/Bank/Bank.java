@@ -51,7 +51,7 @@ public class Bank {
 
     @Inject
     public Bank(AccountInfoPrinterService accountInfoPrinterService) {
-        this.registerActions();
+//        this.registerActions();
     }
 
     public void registerActions() {
