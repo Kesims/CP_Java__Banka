@@ -1,14 +1,23 @@
 package me.Kesims.Bank.accounts;
 
+import me.Kesims.Bank.card.BaseCard;
 import me.Kesims.Bank.person.Person;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class BaseAccount {
     private float balance;
     private Person owner;
+    private List<BaseCard> cards = new LinkedList<>();
+    private String accountNumber;
 
-    public BaseAccount(Person owner, float initialBalance) {
+
+
+    public BaseAccount(String accountNumber, Person owner, float initialBalance) {
         this.balance = initialBalance;
         this.owner = owner;
+        this.accountNumber = accountNumber;
     }
 
     public float getBalance() {
@@ -31,5 +40,17 @@ public class BaseAccount {
 
     public Person getOwner() {
         return owner;
+    }
+
+    public void addCard(BaseCard card) {
+        this.cards.add(card);
+    }
+
+    public int getCardCount() {
+        return this.cards.size();
+    }
+
+    public String getAccountNumber() {
+        return this.accountNumber;
     }
 }

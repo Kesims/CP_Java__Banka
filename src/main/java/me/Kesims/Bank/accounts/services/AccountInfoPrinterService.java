@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 @Singleton
 public class AccountInfoPrinterService {
     public void printAccountBalance(BaseAccount account) {
-        System.out.println("Balance of " + account.getOwner().getFullName() + " is " + account.getBalance());
+        System.out.println("Balance of " + account.getOwner().getFullName() + " (" + account.getAccountNumber() + ") is " + account.getBalance());
     }
 
     private String getTypePrefix(BaseAccount account) {
