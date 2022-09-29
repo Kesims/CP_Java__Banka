@@ -5,20 +5,19 @@ import me.Kesims.Bank.accounts.AccountNumberGenerator;
 import me.Kesims.Bank.accounts.AccountType;
 import me.Kesims.Bank.accounts.BaseAccount;
 import me.Kesims.Bank.person.Person;
-import org.checkerframework.checker.units.qual.A;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Random;
 
 @Singleton
 public class AccountCreationService {
+
+    @Inject
     AccountNumberGenerator accountNumberGenerator;
+
+    @Inject
     AccountFactory accountFactory;
 
-    public AccountCreationService() {
-        accountNumberGenerator = new AccountNumberGenerator();
-        accountFactory = new AccountFactory();
-    }
 
     public BaseAccount createAccount(AccountType type, Person person, float balance) {
         String accountNum = accountNumberGenerator.getRandomAccountNumber();

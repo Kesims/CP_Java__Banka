@@ -3,6 +3,7 @@ package me.Kesims.Bank.accounts;
 import me.Kesims.Bank.card.BaseCard;
 import me.Kesims.Bank.person.Person;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -52,5 +53,9 @@ public class BaseAccount {
 
     public String getAccountNumber() {
         return this.accountNumber;
+    }
+
+    public List<BaseCard> getAccountCards() {
+        return this.cards;
     }
 }

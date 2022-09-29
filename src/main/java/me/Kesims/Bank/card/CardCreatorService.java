@@ -10,13 +10,15 @@ import javax.inject.Singleton;
 public class CardCreatorService {
 
     @Inject
+    private CardNumberGeneratorService cardNumberGeneratorService;
+    @Inject
     private CardFactory cardFactory;
 
     public void createCardAndSetIntoAccount(BaseAccount baseAccount) {
 
-        String cardNumber = "CARD_NUMBER"; // TODO generate
-        String expiration = "EXP"; // TODO generate
-        String cvc = "CVC"; // TODO generate
+        String cardNumber = cardNumberGeneratorService.generateCardNumber();
+        String expiration = cardNumberGeneratorService.generateExpiration();
+        String cvc = cardNumberGeneratorService.generateCvc();
 
         BaseCard card = this.cardFactory.createBaseCard(baseAccount, cardNumber, expiration, cvc);
         baseAccount.addCard(card);

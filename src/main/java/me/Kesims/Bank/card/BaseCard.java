@@ -18,4 +18,14 @@ public class BaseCard {
         this.expiration = expiration;
         this.cvc = cvc;
     }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+    public String getExpiration() {
+        return expiration;
+    }
+    public String getCvc() {
+        return cvc;
+    }
 }

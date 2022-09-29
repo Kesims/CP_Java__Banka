@@ -1,5 +1,6 @@
 package me.Kesims.Bank;
 
+import com.google.gson.annotations.Since;
 import me.Kesims.Bank.accounts.AccountFactory;
 import me.Kesims.Bank.accounts.AccountType;
 import me.Kesims.Bank.accounts.BaseAccount;
@@ -10,6 +11,7 @@ import me.Kesims.Bank.accounts.services.MoneyTransferService;
 import me.Kesims.Bank.actions.ActionListener;
 import me.Kesims.Bank.actions.HelpAction;
 import me.Kesims.Bank.card.CardCreatorService;
+import me.Kesims.Bank.card.CardInfoPrinterService;
 import me.Kesims.Bank.menu.Menu;
 import me.Kesims.Bank.menu.MenuChoices;
 import me.Kesims.Bank.person.Person;
@@ -43,6 +45,9 @@ public class Bank {
 
     @Inject
     private CardCreatorService cardCreatorService;
+
+    @Inject
+    private CardInfoPrinterService cardInfoPrinterService;
 
     @Inject
     public Bank(AccountInfoPrinterService accountInfoPrinterService) {
@@ -109,5 +114,8 @@ public class Bank {
 
         this.cardCreatorService.createCardAndSetIntoAccount(accountOne);
         this.accountInfoPrinterService.printAccountBalance(accountOne);
+
+        this.cardInfoPrinterService.printAccountCards(accountOne);
+
     }
 }
