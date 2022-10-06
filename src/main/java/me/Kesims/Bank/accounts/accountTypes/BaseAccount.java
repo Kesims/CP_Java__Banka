@@ -4,6 +4,7 @@ import me.Kesims.Bank.card.BaseCard;
 import me.Kesims.Bank.person.Person;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BaseAccount {
     private float balance;
@@ -43,6 +44,12 @@ public class BaseAccount {
 
     public void addCard(BaseCard card) {
         this.cards.add(card);
+    }
+
+    public void addMultipleCards(List<BaseCard> cardList) {
+        for(BaseCard card : cardList) {
+            this.addCard(card);
+        }
     }
 
     public int getCardCount() {

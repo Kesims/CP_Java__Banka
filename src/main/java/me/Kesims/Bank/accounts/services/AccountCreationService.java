@@ -6,6 +6,7 @@ import me.Kesims.Bank.accounts.AccountStorageService;
 import me.Kesims.Bank.accounts.accountTypes.AccountType;
 import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
 import me.Kesims.Bank.accounts.serialization.AccountJsonSerializationObject;
+import me.Kesims.Bank.card.CardCreatorService;
 import me.Kesims.Bank.person.Person;
 import me.Kesims.Bank.person.PersonFactory;
 
@@ -27,6 +28,9 @@ public class AccountCreationService {
     @Inject
     PersonFactory personFactory;
 
+    @Inject
+    CardCreatorService cardCreatorService;
+
 
     public BaseAccount createAccount(AccountType type, Person person, float balance) {
         String accountNum = accountNumberGenerator.getRandomAccountNumber();
@@ -42,8 +46,19 @@ public class AccountCreationService {
         return account;
     }
 
+    public BaseAccount createAccount(AccountJsonSerializationObject serializedAccount) {
+        String accountNum = serializedAccount.accountNumber;
 
-//    public BaseAccount createFromSerializedAccount(AccountJsonSerializationObject serializedAccount) {
-//        return this.createAccount(serializedAccount.accountNumber, personFactory.createFromSerializedPerson(serializedAccount.owner), serializedAccount.balance);
-//    }
+        BaseAccount account = switch(AccountType.getAccountTypeFromClassname(serializedAccount.accountType)) {
+            case BaseAccount -> this.accountFactory.createBaseAccount(accountNum, personFactory.createFromSerializedPerson(serializedAccount.owner), serializedAccount.balance);
+            case SavingsAccount -> this.accountFactory.createSavingsAccount(accountNum, personFactory.createFromSerializedPerson(serializedAccount.owner), serializedAccount.balance);
+            case StudentAccount -> this.accountFactory.createStudentAccount(accountNum, personFactory.createFromSerializedPerson(serializedAccount.owner), serializedAccount.balance);
+        };
+
+        accountStorageService.addAccount(account);
+
+        cardCreatorService.deserializeCardListAndSetIntoAccount(serializedAccount.cards, account);
+
+        return account;
+    }
 }

@@ -132,6 +132,7 @@ public class Bank {
             System.out.println(jsonFile);
             AccountJsonSerializationObject deserializedAccount = gson.fromJson(jsonFile, AccountJsonSerializationObject.class);
             System.out.println(deserializedAccount.accountNumber);
+            BaseAccount deserializedBase = accountCreationService.createAccount(deserializedAccount);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
