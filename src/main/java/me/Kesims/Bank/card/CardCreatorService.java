@@ -1,7 +1,7 @@
 package me.Kesims.Bank.card;
 
 
-import me.Kesims.Bank.accounts.BaseAccount;
+import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

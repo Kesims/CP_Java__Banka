@@ -1,4 +1,4 @@
-package me.Kesims.Bank.accounts;
+package me.Kesims.Bank.accounts.accountTypes;
 
 import me.Kesims.Bank.card.BaseCard;
 import me.Kesims.Bank.person.Person;

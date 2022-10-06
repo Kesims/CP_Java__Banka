@@ -2,6 +2,9 @@ package me.Kesims.Bank.accounts;
 
 
 import com.google.inject.Singleton;
+import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
+import me.Kesims.Bank.accounts.accountTypes.SavingsAccount;
+import me.Kesims.Bank.accounts.accountTypes.StudentAccount;
 import me.Kesims.Bank.person.Person;
 
 @Singleton

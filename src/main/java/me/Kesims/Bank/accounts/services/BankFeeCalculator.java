@@ -1,8 +1,8 @@
 package me.Kesims.Bank.accounts.services;
 
-import me.Kesims.Bank.accounts.BaseAccount;
-import me.Kesims.Bank.accounts.SavingsAccount;
-import me.Kesims.Bank.accounts.StudentAccount;
+import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
+import me.Kesims.Bank.accounts.accountTypes.SavingsAccount;
+import me.Kesims.Bank.accounts.accountTypes.StudentAccount;
 
 public class BankFeeCalculator {
     private final float FEE_BASE = 20;

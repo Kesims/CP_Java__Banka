@@ -1,7 +1,7 @@
 package me.Kesims.Bank.accounts.services;
 
-import me.Kesims.Bank.accounts.BaseAccount;
-import me.Kesims.Bank.accounts.InterestAccountInterface;
+import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
+import me.Kesims.Bank.accounts.accountTypes.InterestAccountInterface;
 
 public class InterestCalculator {
     public float calculateInterest(BaseAccount account) {

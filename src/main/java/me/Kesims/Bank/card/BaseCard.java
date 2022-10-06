@@ -1,6 +1,6 @@
 package me.Kesims.Bank.card;
 
-import me.Kesims.Bank.accounts.BaseAccount;
+import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
 
 public class BaseCard {
 

@@ -1,9 +1,8 @@
 package me.Kesims.Bank;
 
-import com.google.gson.annotations.Since;
-import me.Kesims.Bank.accounts.AccountFactory;
-import me.Kesims.Bank.accounts.AccountType;
-import me.Kesims.Bank.accounts.BaseAccount;
+import com.google.gson.Gson;
+import me.Kesims.Bank.accounts.accountTypes.AccountType;
+import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
 import me.Kesims.Bank.accounts.services.AccountCreationService;
 import me.Kesims.Bank.accounts.services.AccountInfoPrinterService;
 import me.Kesims.Bank.accounts.services.InterestManagerService;
@@ -12,12 +11,14 @@ import me.Kesims.Bank.actions.ActionListener;
 import me.Kesims.Bank.actions.HelpAction;
 import me.Kesims.Bank.card.CardCreatorService;
 import me.Kesims.Bank.card.CardInfoPrinterService;
+import me.Kesims.Bank.io.IO;
 import me.Kesims.Bank.menu.Menu;
 import me.Kesims.Bank.menu.MenuChoices;
 import me.Kesims.Bank.person.Person;
 import me.Kesims.Bank.person.PersonFactory;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Bank {
@@ -100,12 +101,8 @@ public class Bank {
         this.accountInfoPrinterService.printAccountBalance(accountTwo);
         System.out.println();
 
-        ArrayList<BaseAccount> accounts = new ArrayList<>();
-        accounts.add(accountOne);
-        accounts.add(accountTwo);
-        accounts.add(accountThree);
 
-        interestManagerService.addInterests(accounts);
+        interestManagerService.addInterests();
 
         this.accountInfoPrinterService.printAccountBalance(accountOne);
         this.accountInfoPrinterService.printAccountBalance(accountTwo);
@@ -116,6 +113,21 @@ public class Bank {
         this.accountInfoPrinterService.printAccountBalance(accountOne);
 
         this.cardInfoPrinterService.printAccountCards(accountOne);
+
+
+
+
+        Gson gson = new Gson();
+        String json = gson.toJson(accountOne);
+        System.out.println(json);
+        try {
+            IO.writeFile("accounts.json", json);
+            String jsonFile = IO.readFile("accounts.json");
+            System.out.println(jsonFile);
+            BaseAccount readAccount = gson.fromJson(jsonFile, BaseAccount.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
