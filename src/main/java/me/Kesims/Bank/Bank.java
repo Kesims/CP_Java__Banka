@@ -3,6 +3,8 @@ package me.Kesims.Bank;
 import com.google.gson.Gson;
 import me.Kesims.Bank.accounts.accountTypes.AccountType;
 import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
+import me.Kesims.Bank.accounts.serialization.AccountJsonSerializationObject;
+import me.Kesims.Bank.accounts.serialization.AccountJsonSerializationObjectFactory;
 import me.Kesims.Bank.accounts.services.AccountCreationService;
 import me.Kesims.Bank.accounts.services.AccountInfoPrinterService;
 import me.Kesims.Bank.accounts.services.InterestManagerService;
@@ -54,6 +56,9 @@ public class Bank {
     public Bank(AccountInfoPrinterService accountInfoPrinterService) {
 //        this.registerActions();
     }
+
+    @Inject
+    private AccountJsonSerializationObjectFactory accountJsonSerializationObjectFactory;
 
     public void registerActions() {
         this.actionListener.registerAction(MenuChoices.HELP, new HelpAction());
@@ -118,13 +123,15 @@ public class Bank {
 
 
         Gson gson = new Gson();
-        String json = gson.toJson(accountOne);
+        String json = gson.toJson(accountJsonSerializationObjectFactory.createFromBaseAccount(accountOne));
         System.out.println(json);
+
         try {
             IO.writeFile("accounts.json", json);
             String jsonFile = IO.readFile("accounts.json");
             System.out.println(jsonFile);
-            BaseAccount readAccount = gson.fromJson(jsonFile, BaseAccount.class);
+            AccountJsonSerializationObject deserializedAccount = gson.fromJson(jsonFile, AccountJsonSerializationObject.class);
+            System.out.println(deserializedAccount.accountNumber);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -5,7 +5,9 @@ import me.Kesims.Bank.accounts.AccountNumberGenerator;
 import me.Kesims.Bank.accounts.AccountStorageService;
 import me.Kesims.Bank.accounts.accountTypes.AccountType;
 import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
+import me.Kesims.Bank.accounts.serialization.AccountJsonSerializationObject;
 import me.Kesims.Bank.person.Person;
+import me.Kesims.Bank.person.PersonFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -22,6 +24,9 @@ public class AccountCreationService {
     @Inject
     AccountStorageService accountStorageService;
 
+    @Inject
+    PersonFactory personFactory;
+
 
     public BaseAccount createAccount(AccountType type, Person person, float balance) {
         String accountNum = accountNumberGenerator.getRandomAccountNumber();
@@ -36,4 +41,9 @@ public class AccountCreationService {
 
         return account;
     }
+
+
+//    public BaseAccount createFromSerializedAccount(AccountJsonSerializationObject serializedAccount) {
+//        return this.createAccount(serializedAccount.accountNumber, personFactory.createFromSerializedPerson(serializedAccount.owner), serializedAccount.balance);
+//    }
 }

@@ -4,7 +4,7 @@ import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
 
 public class BaseCard {
 
-    private BaseAccount baseAccount;
+    private transient BaseAccount baseAccount; // Transient blokuje serializaci
 
     private String cardNumber;
 

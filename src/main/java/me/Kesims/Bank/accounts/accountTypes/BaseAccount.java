@@ -4,13 +4,11 @@ import me.Kesims.Bank.card.BaseCard;
 import me.Kesims.Bank.person.Person;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class BaseAccount {
     private float balance;
     private Person owner;
-    private List<BaseCard> cards = new LinkedList<>();
+    private ArrayList<BaseCard> cards = new ArrayList<>();
     private String accountNumber;
 
 
@@ -55,7 +53,7 @@ public class BaseAccount {
         return this.accountNumber;
     }
 
-    public List<BaseCard> getAccountCards() {
+    public ArrayList<BaseCard> getAccountCards() {
         return this.cards;
     }
 }
