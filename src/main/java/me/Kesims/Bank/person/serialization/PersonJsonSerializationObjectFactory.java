@@ -10,6 +10,7 @@ public class PersonJsonSerializationObjectFactory {
         PersonJsonSerializationObject p = new PersonJsonSerializationObject();
         p.firstName = person.getFirstName();
         p.lastName = person.getLastName();
+        p.id = person.getId();
 
         return p;
     }

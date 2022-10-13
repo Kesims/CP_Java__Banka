@@ -88,7 +88,7 @@ public class Bank {
 
     public void example() {
 
-        Person owner = this.personFactory.createPerson("Matej", "Neumann");
+        Person owner = this.personFactory.createPerson("Matej", "Neumann", 1);
 
         BaseAccount accountOne = this.accountCreationService.createAccount(AccountType.StudentAccount, owner, 1000);
         BaseAccount accountTwo = this.accountCreationService.createAccount(AccountType.BaseAccount, owner, 1000);

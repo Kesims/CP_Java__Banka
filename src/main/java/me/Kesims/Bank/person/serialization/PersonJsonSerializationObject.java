@@ -4,4 +4,6 @@ public class PersonJsonSerializationObject {
     public String firstName;
     public String lastName;
 
+    public int id;
+
 }

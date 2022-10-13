@@ -4,12 +4,13 @@ import me.Kesims.Bank.card.BaseCard;
 import me.Kesims.Bank.person.Person;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class BaseAccount {
     private float balance;
     private Person owner;
-    private ArrayList<BaseCard> cards = new ArrayList<>();
+    private HashMap<String, BaseCard> cards = new HashMap<>();
     private String accountNumber;
 
 
@@ -43,7 +44,7 @@ public class BaseAccount {
     }
 
     public void addCard(BaseCard card) {
-        this.cards.add(card);
+        this.cards.put(card.getCardNumber(), card);
     }
 
     public void addMultipleCards(List<BaseCard> cardList) {
@@ -61,6 +62,6 @@ public class BaseAccount {
     }
 
     public ArrayList<BaseCard> getAccountCards() {
-        return this.cards;
+        return new ArrayList<>(this.cards.values());
     }
 }
