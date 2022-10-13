@@ -1,6 +1,6 @@
-package me.Kesims.Bank;
+package me.Kesims.Bank.bank;
 
-import com.google.gson.Gson;
+import me.Kesims.Bank.bank.serialization.BankJsonSerializationObjectFactory;
 import me.Kesims.Bank.accounts.accountTypes.AccountType;
 import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
 import me.Kesims.Bank.accounts.serialization.AccountJsonSerializationObject;
@@ -13,15 +13,14 @@ import me.Kesims.Bank.actions.ActionListener;
 import me.Kesims.Bank.actions.HelpAction;
 import me.Kesims.Bank.card.CardCreatorService;
 import me.Kesims.Bank.card.CardInfoPrinterService;
-import me.Kesims.Bank.io.IO;
 import me.Kesims.Bank.menu.Menu;
 import me.Kesims.Bank.menu.MenuChoices;
 import me.Kesims.Bank.person.Person;
 import me.Kesims.Bank.person.PersonFactory;
+import me.Kesims.Bank.storage.GsonSerializationService;
+import me.Kesims.Bank.storage.IOFileStorageService;
 
 import javax.inject.Inject;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class Bank {
 
@@ -43,9 +42,6 @@ public class Bank {
     @Inject
     private AccountCreationService accountCreationService;
 
-//    @Inject
-//    private AccountFactory accountFactory;
-
     @Inject
     private CardCreatorService cardCreatorService;
 
@@ -58,7 +54,16 @@ public class Bank {
     }
 
     @Inject
+    BankJsonSerializationObjectFactory bankJsonSerializationObjectFactory;
+
+    @Inject
+    private IOFileStorageService storage;
+
+    @Inject
     private AccountJsonSerializationObjectFactory accountJsonSerializationObjectFactory;
+
+    @Inject
+    private GsonSerializationService gsonSerializationService;
 
     public void registerActions() {
         this.actionListener.registerAction(MenuChoices.HELP, new HelpAction());
@@ -122,20 +127,14 @@ public class Bank {
 
 
 
-        Gson gson = new Gson();
-        String json = gson.toJson(accountJsonSerializationObjectFactory.createFromBaseAccount(accountOne));
+        String json = gsonSerializationService.serialize(bankJsonSerializationObjectFactory.createFromBank());
         System.out.println(json);
 
-        try {
-            IO.writeFile("accounts.json", json);
-            String jsonFile = IO.readFile("accounts.json");
-            System.out.println(jsonFile);
-            AccountJsonSerializationObject deserializedAccount = gson.fromJson(jsonFile, AccountJsonSerializationObject.class);
-            System.out.println(deserializedAccount.accountNumber);
-            BaseAccount deserializedBase = accountCreationService.createAccount(deserializedAccount);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        storage.save(json, "bank.json");
 
+        String jsonFile = storage.load("accounts.json");
+        AccountJsonSerializationObject deserializedAccount = gsonSerializationService.deserialize(jsonFile, AccountJsonSerializationObject.class);
+        System.out.println(deserializedAccount.accountNumber);
+        BaseAccount deserializedBase = accountCreationService.createAccount(deserializedAccount);
     }
 }

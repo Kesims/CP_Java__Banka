@@ -1,4 +1,4 @@
-package me.Kesims.Bank;
+package me.Kesims.Bank.bank;
 
 import com.google.inject.AbstractModule;
 
