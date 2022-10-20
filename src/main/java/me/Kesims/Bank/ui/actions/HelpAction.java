@@ -1,6 +1,6 @@
-package me.Kesims.Bank.actions;
+package me.Kesims.Bank.ui.actions;
 
-import me.Kesims.Bank.menu.MenuChoices;
+import me.Kesims.Bank.ui.menu.MenuChoices;
 
 public class HelpAction implements Action {
     @Override

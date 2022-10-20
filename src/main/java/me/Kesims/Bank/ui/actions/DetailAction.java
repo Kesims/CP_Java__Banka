@@ -1,4 +1,4 @@
-package me.Kesims.Bank.actions;
+package me.Kesims.Bank.ui.actions;
 
 import me.Kesims.Bank.accounts.AccountStorageService;
 import me.Kesims.Bank.accounts.accountTypes.BaseAccount;

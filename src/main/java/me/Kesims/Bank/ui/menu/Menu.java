@@ -1,9 +1,18 @@
-package me.Kesims.Bank.menu;
+package me.Kesims.Bank.ui.menu;
 
+import me.Kesims.Bank.ui.cmd.ScannerService;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+@Singleton
 public class Menu {
+
+    @Inject
+    ScannerService scanner;
+
     public void printMenu() {
         MenuChoices.help();
     }
@@ -11,8 +20,7 @@ public class Menu {
     public MenuChoices read() {
         try {
             System.out.print("What do you want: ");
-            Scanner scanner = new Scanner(new InputStreamReader(System.in));
-            int menuInput = scanner.nextInt();
+            int menuInput = scanner.readInt();
             System.out.println("Your choice: " + menuInput);
 
             return MenuChoices.getChoiceFromInt(menuInput);
@@ -26,8 +34,7 @@ public class Menu {
     public String simpleRead() {
         try {
             System.out.print("What do you want: ");
-            Scanner scanner = new Scanner(new InputStreamReader(System.in));
-            return scanner.next();
+            return scanner.readString();
         } catch (Exception exception) {
             System.out.println("Input is not valid");
 

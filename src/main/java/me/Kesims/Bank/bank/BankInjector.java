@@ -2,12 +2,8 @@ package me.Kesims.Bank.bank;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.MapBinder;
-import com.google.inject.multibindings.MapBinderBinding;
-import me.Kesims.Bank.actions.Action;
-import me.Kesims.Bank.actions.DetailAction;
-import me.Kesims.Bank.actions.HelpAction;
-import me.Kesims.Bank.actions.LoadBankAction;
-import me.Kesims.Bank.menu.MenuChoices;
+import me.Kesims.Bank.ui.actions.*;
+import me.Kesims.Bank.ui.menu.MenuChoices;
 import me.Kesims.Bank.storage.GsonSerializationService;
 import me.Kesims.Bank.storage.IOFileStorageService;
 import me.Kesims.Bank.storage.Storage;
@@ -25,5 +21,7 @@ public class BankInjector extends AbstractModule {
         uriBinder.addBinding(MenuChoices.LOAD).to(LoadBankAction.class);
         uriBinder.addBinding(MenuChoices.HELP).to(HelpAction.class);
         uriBinder.addBinding(MenuChoices.DETAIL).to(DetailAction.class);
+        uriBinder.addBinding(MenuChoices.SAVE).to(SaveBankAction.class);
+        uriBinder.addBinding(MenuChoices.CREATE_PERSON).to(CreatePersonAction.class);
     }
 }

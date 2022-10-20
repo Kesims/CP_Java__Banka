@@ -1,6 +1,6 @@
-package me.Kesims.Bank.actions;
+package me.Kesims.Bank.ui.actions;
 
-import me.Kesims.Bank.menu.MenuChoices;
+import me.Kesims.Bank.ui.menu.MenuChoices;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

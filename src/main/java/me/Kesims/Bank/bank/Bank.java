@@ -1,6 +1,6 @@
 package me.Kesims.Bank.bank;
 
-import me.Kesims.Bank.actions.ActionProcessService;
+import me.Kesims.Bank.ui.actions.ActionProcessService;
 import me.Kesims.Bank.bank.serialization.BankJsonSerializationObjectFactory;
 import me.Kesims.Bank.accounts.accountTypes.AccountType;
 import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
@@ -10,11 +10,10 @@ import me.Kesims.Bank.accounts.services.AccountCreationService;
 import me.Kesims.Bank.accounts.services.AccountInfoPrinterService;
 import me.Kesims.Bank.accounts.services.InterestManagerService;
 import me.Kesims.Bank.accounts.services.MoneyTransferService;
-import me.Kesims.Bank.actions.HelpAction;
 import me.Kesims.Bank.card.CardCreatorService;
 import me.Kesims.Bank.card.CardInfoPrinterService;
-import me.Kesims.Bank.menu.Menu;
-import me.Kesims.Bank.menu.MenuChoices;
+import me.Kesims.Bank.ui.menu.Menu;
+import me.Kesims.Bank.ui.menu.MenuChoices;
 import me.Kesims.Bank.person.Person;
 import me.Kesims.Bank.person.PersonFactory;
 import me.Kesims.Bank.storage.GsonSerializationService;
@@ -64,10 +63,12 @@ public class Bank {
     @Inject
     ActionProcessService actionProcessService;
 
+    @Inject
+    Menu menu;
+
     public void startTerminal() {
         System.out.println("Hello from bank application!");
 
-        Menu menu = new Menu();
         menu.printMenu();
 
         while (true) {

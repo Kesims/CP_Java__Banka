@@ -1,4 +1,4 @@
-package me.Kesims.Bank.actions;
+package me.Kesims.Bank.ui.actions;
 
 import me.Kesims.Bank.bank.BankCreationService;
 
@@ -14,5 +14,6 @@ public class LoadBankAction implements Action {
     @Override
     public void processAction() {
         bankCreationService.createFromFileStorage();
+        System.out.println(" -- Bank Loaded!");
     }
 }
