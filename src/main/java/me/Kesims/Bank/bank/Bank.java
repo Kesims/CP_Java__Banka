@@ -1,5 +1,6 @@
 package me.Kesims.Bank.bank;
 
+import me.Kesims.Bank.actions.ActionProcessService;
 import me.Kesims.Bank.bank.serialization.BankJsonSerializationObjectFactory;
 import me.Kesims.Bank.accounts.accountTypes.AccountType;
 import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
@@ -9,7 +10,6 @@ import me.Kesims.Bank.accounts.services.AccountCreationService;
 import me.Kesims.Bank.accounts.services.AccountInfoPrinterService;
 import me.Kesims.Bank.accounts.services.InterestManagerService;
 import me.Kesims.Bank.accounts.services.MoneyTransferService;
-import me.Kesims.Bank.actions.ActionListener;
 import me.Kesims.Bank.actions.HelpAction;
 import me.Kesims.Bank.card.CardCreatorService;
 import me.Kesims.Bank.card.CardInfoPrinterService;
@@ -23,10 +23,6 @@ import me.Kesims.Bank.storage.IOFileStorageService;
 import javax.inject.Inject;
 
 public class Bank {
-
-    @Inject
-    private ActionListener actionListener;
-
     @Inject
     private AccountInfoPrinterService accountInfoPrinterService;
 
@@ -65,14 +61,8 @@ public class Bank {
     @Inject
     private GsonSerializationService gsonSerializationService;
 
-    public void registerActions() {
-        this.actionListener.registerAction(MenuChoices.HELP, new HelpAction());
-        this.actionListener.registerAction(MenuChoices.DETAIL, new HelpAction());
-        this.actionListener.registerAction(MenuChoices.ACCOUNTS, new HelpAction());
-        this.actionListener.registerAction(MenuChoices.CREDIT, new HelpAction());
-        this.actionListener.registerAction(MenuChoices.SAVING, new HelpAction());
-        this.actionListener.registerAction(MenuChoices.INVALID_CHOICE, new HelpAction());
-    }
+    @Inject
+    ActionProcessService actionProcessService;
 
     public void startTerminal() {
         System.out.println("Hello from bank application!");
@@ -87,7 +77,7 @@ public class Bank {
                 break;
             }
 
-            this.actionListener.processAction(choice);
+            actionProcessService.processAction(choice);
         }
     }
 
