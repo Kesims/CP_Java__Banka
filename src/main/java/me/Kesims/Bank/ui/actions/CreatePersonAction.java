@@ -27,6 +27,18 @@ public class CreatePersonAction implements Action {
 
         System.out.println("--- Success! Client created. -----------------------");
     }
+
+    public void processActionWithID(int id) {
+        System.out.println("--- New client -------------------------------------");
+        System.out.print(" :: First Name: ");
+        String firstName = scanner.readString();
+        System.out.print(" :: Last Name: ");
+        String lastName = scanner.readString();
+
+        personFactory.createPerson(firstName, lastName, id);
+
+        System.out.println("--- Success! Client created. -----------------------");
+    }
 }
 
 

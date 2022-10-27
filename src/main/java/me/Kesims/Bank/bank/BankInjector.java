@@ -23,5 +23,6 @@ public class BankInjector extends AbstractModule {
         uriBinder.addBinding(MenuChoices.DETAIL).to(DetailAction.class);
         uriBinder.addBinding(MenuChoices.SAVE).to(SaveBankAction.class);
         uriBinder.addBinding(MenuChoices.CREATE_PERSON).to(CreatePersonAction.class);
+        uriBinder.addBinding(MenuChoices.CREATE_ACCOUNT).to(CreateAccountAction.class);
     }
 }
