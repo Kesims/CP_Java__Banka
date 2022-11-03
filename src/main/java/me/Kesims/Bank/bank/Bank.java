@@ -67,8 +67,6 @@ public class Bank {
     Menu menu;
 
     public void startTerminal() {
-        System.out.println("Hello from bank application!");
-
         menu.printMenu();
 
         while (true) {

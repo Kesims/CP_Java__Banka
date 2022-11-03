@@ -5,8 +5,12 @@ import me.Kesims.Bank.accounts.AccountNumberGenerator;
 import me.Kesims.Bank.accounts.AccountStorageService;
 import me.Kesims.Bank.accounts.accountTypes.AccountType;
 import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
+import me.Kesims.Bank.accounts.observers.CeoNotificationObserver;
+import me.Kesims.Bank.accounts.observers.EmailNotificationSubject;
+import me.Kesims.Bank.accounts.observers.PersonNotificationObserver;
 import me.Kesims.Bank.accounts.serialization.AccountJsonSerializationObject;
 import me.Kesims.Bank.card.CardCreatorService;
+import me.Kesims.Bank.observer.Observer;
 import me.Kesims.Bank.person.Person;
 import me.Kesims.Bank.person.PersonFactory;
 
@@ -32,6 +36,9 @@ public class AccountCreationService {
     CardCreatorService cardCreatorService;
 
 
+    EmailNotificationSubject emailNotificationSubject = new EmailNotificationSubject();
+
+
     public BaseAccount createAccount(AccountType type, Person person, float balance) {
         String accountNum = accountNumberGenerator.getRandomAccountNumber();
 
@@ -42,6 +49,15 @@ public class AccountCreationService {
         };
 
         accountStorageService.addAccount(account);
+
+        Observer ceoObserver = new CeoNotificationObserver();
+        Observer personObserver = new PersonNotificationObserver();
+
+        emailNotificationSubject.addObserver(ceoObserver);
+        emailNotificationSubject.addObserver(personObserver);
+        emailNotificationSubject.notifyObservers();
+        emailNotificationSubject.removeObserver(ceoObserver);
+        emailNotificationSubject.removeObserver(personObserver);
 
         return account;
     }
