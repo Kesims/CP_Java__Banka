@@ -72,18 +72,16 @@ public class Bank {
 
     public void startTerminal() {
         quartzScheduler.registerJobs();
-
         menu.printMenu();
 
         while (true) {
             MenuChoices choice = menu.read();
-
             if (choice == MenuChoices.EXIT) {
                 break;
             }
-
             actionProcessService.processAction(choice);
         }
+        quartzScheduler.shutdownScheduler();
     }
 
     public void example() {

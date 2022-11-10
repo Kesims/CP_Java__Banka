@@ -14,11 +14,13 @@ public class QuartzScheduler {
     @Inject
     ExampleJobTrigger exampleJobTrigger;
 
+    private Scheduler scheduler;
+
     public void registerJobs() {
         try {
             BasicConfigurator.configure();
 
-            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+            this.scheduler = StdSchedulerFactory.getDefaultScheduler();
 
             exampleJobTrigger.register(scheduler);
 
@@ -26,6 +28,14 @@ public class QuartzScheduler {
         }
         catch (SchedulerException exception) {
             throw new RuntimeException(exception);
+        }
+    }
+
+    public void shutdownScheduler() {
+        try {
+            scheduler.shutdown();
+        } catch (SchedulerException e) {
+            throw new RuntimeException(e);
         }
     }
 
