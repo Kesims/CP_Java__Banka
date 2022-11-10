@@ -1,5 +1,6 @@
 package me.Kesims.Bank.accounts.observers;
 
+import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
 import me.Kesims.Bank.observer.Observer;
 import me.Kesims.Bank.observer.Subject;
 
@@ -21,9 +22,9 @@ public class EmailNotificationSubject implements Subject {
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(Object... arguments) {
         for(Observer o : observers) {
-            o.update();
+            o.update(arguments);
         }
     }
 }

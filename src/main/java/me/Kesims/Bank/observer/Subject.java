@@ -7,5 +7,5 @@ public interface Subject {
     List<Observer> observers = new ArrayList<>();
     void addObserver(Observer o);
     void removeObserver(Observer o);
-    void notifyObservers();
+    void notifyObservers(Object... arguments);
 }

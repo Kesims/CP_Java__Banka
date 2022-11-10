@@ -22,7 +22,7 @@ public class ConcreteSubject implements Subject {
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(Object... arguments) {
         for(Observer o : observers) {
             o.update();
         }

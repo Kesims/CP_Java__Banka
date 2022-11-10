@@ -55,7 +55,7 @@ public class AccountCreationService {
 
         emailNotificationSubject.addObserver(ceoObserver);
         emailNotificationSubject.addObserver(personObserver);
-        emailNotificationSubject.notifyObservers();
+        emailNotificationSubject.notifyObservers(account);
         emailNotificationSubject.removeObserver(ceoObserver);
         emailNotificationSubject.removeObserver(personObserver);
 

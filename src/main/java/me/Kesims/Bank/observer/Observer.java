@@ -1,5 +1,5 @@
 package me.Kesims.Bank.observer;
 
 public interface Observer {
-    void update();
+    void update(Object... arguments);
 }
