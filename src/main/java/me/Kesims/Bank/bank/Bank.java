@@ -1,5 +1,6 @@
 package me.Kesims.Bank.bank;
 
+import me.Kesims.Bank.cron.QuartzScheduler;
 import me.Kesims.Bank.ui.actions.ActionProcessService;
 import me.Kesims.Bank.bank.serialization.BankJsonSerializationObjectFactory;
 import me.Kesims.Bank.accounts.accountTypes.AccountType;
@@ -66,7 +67,12 @@ public class Bank {
     @Inject
     Menu menu;
 
+    @Inject
+    QuartzScheduler quartzScheduler;
+
     public void startTerminal() {
+        quartzScheduler.registerJobs();
+
         menu.printMenu();
 
         while (true) {

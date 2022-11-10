@@ -1,5 +1,6 @@
 package me.Kesims.Bank.accounts.services;
 
+import com.google.common.eventbus.EventBus;
 import me.Kesims.Bank.accounts.AccountFactory;
 import me.Kesims.Bank.accounts.AccountNumberGenerator;
 import me.Kesims.Bank.accounts.AccountStorageService;
@@ -10,6 +11,8 @@ import me.Kesims.Bank.accounts.observers.EmailNotificationSubject;
 import me.Kesims.Bank.accounts.observers.PersonNotificationObserver;
 import me.Kesims.Bank.accounts.serialization.AccountJsonSerializationObject;
 import me.Kesims.Bank.card.CardCreatorService;
+import me.Kesims.Bank.events.NotificationData;
+import me.Kesims.Bank.events.NotifyCustomerEvent;
 import me.Kesims.Bank.observer.Observer;
 import me.Kesims.Bank.person.Person;
 import me.Kesims.Bank.person.PersonFactory;
@@ -38,6 +41,9 @@ public class AccountCreationService {
 
     EmailNotificationSubject emailNotificationSubject = new EmailNotificationSubject();
 
+    @Inject
+    EventBus eventBus;
+
 
     public BaseAccount createAccount(AccountType type, Person person, float balance) {
         String accountNum = accountNumberGenerator.getRandomAccountNumber();
@@ -58,6 +64,8 @@ public class AccountCreationService {
         emailNotificationSubject.notifyObservers(account);
         emailNotificationSubject.removeObserver(ceoObserver);
         emailNotificationSubject.removeObserver(personObserver);
+
+        eventBus.post(new NotifyCustomerEvent(new NotificationData(person.getFullName())));
 
         return account;
     }
