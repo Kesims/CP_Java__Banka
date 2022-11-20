@@ -17,11 +17,11 @@ public class LowBalanceNotificationJob implements Job {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         System.out.println("Checking accounts for low balance!");
-//        for(BaseAccount account : accountStorageService.getAccounts()) {
-//            if (account.getBalance() < NOTIFICATION_BALANCE_THRESHOLD) {
-//                System.out.println("Warning! Low balance on account " + account.getAccountNumber() + " owned by "
-//                        + account.getOwner().getFullName() + "! (" + account.getBalance() + ")");
-//            }
-//        }
+        for(BaseAccount account : accountStorageService.getAccounts()) {
+            if (account.getBalance() < NOTIFICATION_BALANCE_THRESHOLD) {
+                System.out.println("Warning! Low balance on account " + account.getAccountNumber() + " owned by "
+                        + account.getOwner().getFullName() + "! (" + account.getBalance() + ")");
+            }
+        }
     }
 }

@@ -16,7 +16,7 @@ public class AccountInterestManagerJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-//        interestManagerService.addInterests();
+        interestManagerService.addInterests();
         System.out.println("Adding interests to savings accounts.");
     }
 }

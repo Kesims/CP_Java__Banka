@@ -14,6 +14,7 @@ import me.Kesims.Bank.storage.GsonSerializationService;
 import me.Kesims.Bank.storage.IOFileStorageService;
 import me.Kesims.Bank.storage.Storage;
 import me.Kesims.Bank.storage.StringSerialization;
+import org.quartz.spi.JobFactory;
 
 public class BankInjector extends AbstractModule {
 

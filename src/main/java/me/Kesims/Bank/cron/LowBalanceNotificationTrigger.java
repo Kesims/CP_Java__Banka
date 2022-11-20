@@ -4,6 +4,7 @@ import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
+import org.quartz.spi.TriggerFiredBundle;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -20,9 +21,13 @@ public class LowBalanceNotificationTrigger implements JobTrigger{
     @Inject
     LowBalanceNotificationJob lowBalanceNotificationJob;
 
+    @Inject
+    JobFactory jobFactory;
+
     @Override
     public void register(Scheduler scheduler) {
         // define the job and tie it to our class
+
         JobDetail job = newJob(LowBalanceNotificationJob.class)
                 .withIdentity("LowBalanceNotification", "BankNotify")
                 .build();

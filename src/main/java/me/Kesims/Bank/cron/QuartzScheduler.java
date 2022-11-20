@@ -25,6 +25,9 @@ public class QuartzScheduler {
     @Inject
     AccountStorageService accountStorageService;
 
+    @Inject
+    JobFactory jobFactory;
+
     private Scheduler scheduler;
 
     public void registerJobs() {
@@ -32,6 +35,7 @@ public class QuartzScheduler {
             BasicConfigurator.configure();
 
             this.scheduler = StdSchedulerFactory.getDefaultScheduler();
+            this.scheduler.setJobFactory(jobFactory);
 
 //            exampleJobTrigger.register(scheduler);
             lowBalanceNotificationTrigger.register(scheduler);
