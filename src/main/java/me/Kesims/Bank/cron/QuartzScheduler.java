@@ -1,5 +1,7 @@
 package me.Kesims.Bank.cron;
 
+import me.Kesims.Bank.accounts.AccountStorageService;
+import me.Kesims.Bank.cron.examples.SimpleCronJobTrigger;
 import org.apache.log4j.BasicConfigurator;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -12,7 +14,16 @@ import javax.inject.Singleton;
 public class QuartzScheduler {
 
     @Inject
-    ExampleJobTrigger exampleJobTrigger;
+    SimpleCronJobTrigger exampleJobTrigger;
+
+    @Inject
+    LowBalanceNotificationTrigger lowBalanceNotificationTrigger;
+
+    @Inject
+    AccountInterestManagerJobTrigger accountInterestManagerJobTrigger;
+
+    @Inject
+    AccountStorageService accountStorageService;
 
     private Scheduler scheduler;
 
@@ -22,7 +33,11 @@ public class QuartzScheduler {
 
             this.scheduler = StdSchedulerFactory.getDefaultScheduler();
 
-            exampleJobTrigger.register(scheduler);
+//            exampleJobTrigger.register(scheduler);
+            lowBalanceNotificationTrigger.register(scheduler);
+            accountInterestManagerJobTrigger.register(scheduler);
+
+            System.out.println(accountStorageService.getAccounts());
 
             scheduler.start();
         }

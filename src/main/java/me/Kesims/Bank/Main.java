@@ -4,19 +4,12 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import me.Kesims.Bank.bank.Bank;
 import me.Kesims.Bank.bank.BankInjector;
-import me.Kesims.Bank.cron.SimpleCronJob;
 import me.Kesims.Bank.events.NotifyCustomerEventListener;
-import org.apache.log4j.BasicConfigurator;
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
-import org.quartz.impl.StdSchedulerFactory;
 
 import static me.Kesims.Bank.observer.example.Main.mainObs;
 import static org.quartz.JobBuilder.newJob;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
-import static org.quartz.TriggerBuilder.newTrigger;
+
+
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package me.Kesims.Bank.cron;
+package me.Kesims.Bank.cron.examples;
 
 import org.apache.log4j.Logger;
 import org.quartz.Job;

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 @Singleton
 public class InterestManagerService {
+
     InterestCalculator interestCalculator;
 
     @Inject

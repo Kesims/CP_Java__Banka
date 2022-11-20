@@ -5,6 +5,7 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import static org.quartz.JobBuilder.newJob;
@@ -12,20 +13,26 @@ import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 @Singleton
-public class ExampleJobTrigger implements JobTrigger{
+public class LowBalanceNotificationTrigger implements JobTrigger{
+
+    final int EXECUTION_INTERVAL = 60;
+
+    @Inject
+    LowBalanceNotificationJob lowBalanceNotificationJob;
+
     @Override
     public void register(Scheduler scheduler) {
-        // define the job and tie it to our HelloJob class
-        JobDetail job = newJob(SimpleCronJob.class)
-                .withIdentity("job1", "group1")
+        // define the job and tie it to our class
+        JobDetail job = newJob(LowBalanceNotificationJob.class)
+                .withIdentity("LowBalanceNotification", "BankNotify")
                 .build();
 
-        // Trigger the job to run now, and then repeat every 40 seconds
+        // Trigger the job to run now, and then repeat every xx seconds
         Trigger trigger = newTrigger()
-                .withIdentity("trigger1", "group1")
+                .withIdentity("LowBalanceNotificationTrigger", "BankNotify")
                 .startNow()
                 .withSchedule(simpleSchedule()
-                        .withIntervalInSeconds(10)
+                        .withIntervalInSeconds(EXECUTION_INTERVAL)
                         .repeatForever())
                 .build();
 

@@ -6,6 +6,7 @@ import org.checkerframework.checker.units.qual.A;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Singleton
 public class AccountStorageService {
@@ -15,7 +16,7 @@ public class AccountStorageService {
         this.accounts.put(account.getAccountNumber(), account);
     }
 
-    public ArrayList<BaseAccount> getAccounts() {
+    public List<BaseAccount> getAccounts() {
         return new ArrayList<>(this.accounts.values());
     }
 
