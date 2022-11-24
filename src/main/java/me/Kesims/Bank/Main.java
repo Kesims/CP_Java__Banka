@@ -61,7 +61,7 @@ public class Main {
 
 
 
-
+        bank.example();
         bank.startTerminal();
     }
 }

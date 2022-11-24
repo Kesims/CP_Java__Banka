@@ -1,6 +1,5 @@
 package me.Kesims.Bank.cron;
 
-import me.Kesims.Bank.accounts.AccountStorageService;
 import me.Kesims.Bank.accounts.services.InterestManagerService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;

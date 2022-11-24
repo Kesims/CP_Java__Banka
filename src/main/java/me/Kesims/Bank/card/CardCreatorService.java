@@ -16,7 +16,10 @@ public class CardCreatorService {
     @Inject
     private CardFactory cardFactory;
 
-    public void createCardAndSetIntoAccount(BaseAccount baseAccount) {
+    @Inject
+    private CardStorageService cardStorageService;
+
+    public BaseCard createCardAndSetIntoAccount(BaseAccount baseAccount) {
 
         String cardNumber = cardNumberGeneratorService.generateCardNumber();
         String expiration = cardNumberGeneratorService.generateExpiration();
@@ -24,6 +27,8 @@ public class CardCreatorService {
 
         BaseCard card = this.cardFactory.createBaseCard(baseAccount, cardNumber, expiration, cvc);
         baseAccount.addCard(card);
+        cardStorageService.addCard(card);
+        return card;
     }
 
     public void deserializeCardListAndSetIntoAccount(List<CardJsonSerializationObject> serializedCardList, BaseAccount account) {
