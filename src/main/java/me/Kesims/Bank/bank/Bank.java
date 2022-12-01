@@ -1,6 +1,6 @@
 package me.Kesims.Bank.bank;
 
-import me.Kesims.Bank.atms.ATMFactory;
+import me.Kesims.Bank.atms.ATMCreationService;
 import me.Kesims.Bank.atms.ATMInteractionService;
 import me.Kesims.Bank.atms.ATMStorageService;
 import me.Kesims.Bank.atms.BaseATM;
@@ -79,7 +79,7 @@ public class Bank {
     CardStorageService cardStorageService;
 
     @Inject
-    ATMFactory atmFactory;
+    ATMCreationService atmFactory;
 
     @Inject
     ATMStorageService atmStorageService;
