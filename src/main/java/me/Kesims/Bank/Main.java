@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import me.Kesims.Bank.bank.Bank;
 import me.Kesims.Bank.bank.BankInjector;
 import me.Kesims.Bank.events.NotifyCustomerEventListener;
+import me.Kesims.Bank.utils.Calculator;
 
 import static me.Kesims.Bank.observer.example.Main.mainObs;
 import static org.quartz.JobBuilder.newJob;
@@ -14,6 +15,9 @@ import static org.quartz.JobBuilder.newJob;
 public class Main {
 
     public static void main(String[] args) {
+
+        System.out.println(Calculator.add(1, 2));
+
         mainObs();
 
         Injector injector = Guice.createInjector(new BankInjector());
