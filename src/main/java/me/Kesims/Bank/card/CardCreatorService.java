@@ -19,13 +19,22 @@ public class CardCreatorService {
     @Inject
     private CardStorageService cardStorageService;
 
-    public BaseCard createCardAndSetIntoAccount(BaseAccount baseAccount) {
+    public BaseCard createCardAndSetIntoAccount(CardType cardType, BaseAccount baseAccount, Object... args) {
 
         String cardNumber = cardNumberGeneratorService.generateCardNumber();
         String expiration = cardNumberGeneratorService.generateExpiration();
         String cvc = cardNumberGeneratorService.generateCvc();
+        BaseCard card = switch(cardType) {
+            case BaseCard ->  this.cardFactory.createBaseCard(baseAccount, cardNumber, expiration, cvc);
+            case CreditCard -> {
+                if(args[0] instanceof Float) {
+                    yield this.cardFactory.createCreditCard(baseAccount, cardNumber, expiration, cvc, (float)args[0]);
+                }
+                else throw new IllegalArgumentException();
+            }
+        };
 
-        BaseCard card = this.cardFactory.createBaseCard(baseAccount, cardNumber, expiration, cvc);
+
         baseAccount.addCard(card);
         cardStorageService.addCard(card);
         return card;
