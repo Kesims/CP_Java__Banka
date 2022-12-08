@@ -2,7 +2,6 @@ package me.Kesims.Bank.accounts.services;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
-import me.Kesims.Bank.accounts.AccountNumberGeneratorMock;
 import me.Kesims.Bank.accounts.AccountStorageService;
 import me.Kesims.Bank.accounts.accountTypes.AccountType;
 import me.Kesims.Bank.accounts.accountTypes.BaseAccount;
