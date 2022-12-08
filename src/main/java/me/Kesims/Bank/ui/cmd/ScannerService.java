@@ -14,4 +14,8 @@ public class ScannerService {
     public int readInt() {
         return scanner.nextInt();
     }
+
+    public float readFloat() {
+        return scanner.nextFloat();
+    }
 }

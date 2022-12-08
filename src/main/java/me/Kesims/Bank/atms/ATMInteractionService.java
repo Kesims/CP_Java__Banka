@@ -3,6 +3,8 @@ package me.Kesims.Bank.atms;
 import me.Kesims.Bank.accounts.services.AccountInfoPrinterService;
 import me.Kesims.Bank.atms.BaseATM;
 import me.Kesims.Bank.card.BaseCard;
+import me.Kesims.Bank.card.CreditCard;
+import me.Kesims.Bank.card.CreditCardMoneyTransferService;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -11,6 +13,9 @@ import javax.inject.Singleton;
 public class ATMInteractionService {
     @Inject
     AccountInfoPrinterService accountInfoPrinterService;
+
+    @Inject
+    CreditCardMoneyTransferService creditCardMoneyTransferService;
 
     public void printAccountBalanceByCard(BaseATM atm) {
         BaseCard card = atm.getCard();
@@ -27,11 +32,21 @@ public class ATMInteractionService {
             System.out.println("No card inserted in the ATM");
             return;
         }
-        if(card.getAccount().removeBalance(amount)) {
-            System.out.println("Money successfully withdrew from the machine!");
+        if (card instanceof CreditCard creditCard) {
+            if(creditCardMoneyTransferService.withdrawFromCreditCard(creditCard, amount)) {
+                System.out.println("Money successfully withdrew from the machine!");
+            }
+            else {
+                System.out.println("The required amount is above your limit.");
+            }
         }
         else {
-            System.out.println("Balance too low for withdrawal!");
+            if(card.getAccount().removeBalance(amount)) {
+                System.out.println("Money successfully withdrew from the machine!");
+            }
+            else {
+                System.out.println("Balance too low for withdrawal!");
+            }
         }
     }
 }

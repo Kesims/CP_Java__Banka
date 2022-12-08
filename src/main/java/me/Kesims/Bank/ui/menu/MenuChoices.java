@@ -1,7 +1,7 @@
 package me.Kesims.Bank.ui.menu;
 
 public enum MenuChoices {
-    HELP, CREATE_PERSON, DETAIL, CREATE_ACCOUNT, CREDIT, SAVING, LOAD, SAVE, EXIT, INVALID_CHOICE;
+    HELP, CREATE_PERSON, DETAIL, CREATE_ACCOUNT, CREDIT, SAVING, LOAD, SAVE, EXIT, INVALID_CHOICE, WITHDRAW_ATM;
 
     public static MenuChoices getChoiceFromInt(int choice) {
         return switch (choice) {
@@ -13,6 +13,7 @@ public enum MenuChoices {
             case 6 -> SAVING;
             case 7 -> LOAD;
             case 8 -> SAVE;
+            case 9 -> WITHDRAW_ATM;
             case 0 -> EXIT;
             default -> INVALID_CHOICE;
         };
@@ -29,6 +30,7 @@ public enum MenuChoices {
         System.out.println(":: SAVING: 6");
         System.out.println(":: LOAD: 7");
         System.out.println(":: SAVE: 8");
+        System.out.println(":: WITHDRAW ATM: 9");
         System.out.println(":: EXIT: 0");
     }
 }

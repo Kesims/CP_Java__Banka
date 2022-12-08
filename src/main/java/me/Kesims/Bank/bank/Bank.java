@@ -4,8 +4,7 @@ import me.Kesims.Bank.atms.ATMCreationService;
 import me.Kesims.Bank.atms.ATMInteractionService;
 import me.Kesims.Bank.atms.ATMStorageService;
 import me.Kesims.Bank.atms.BaseATM;
-import me.Kesims.Bank.card.BaseCard;
-import me.Kesims.Bank.card.CardStorageService;
+import me.Kesims.Bank.card.*;
 import me.Kesims.Bank.cron.QuartzScheduler;
 import me.Kesims.Bank.ui.actions.ActionProcessService;
 import me.Kesims.Bank.bank.serialization.BankJsonSerializationObjectFactory;
@@ -16,8 +15,6 @@ import me.Kesims.Bank.accounts.services.AccountCreationService;
 import me.Kesims.Bank.accounts.services.AccountInfoPrinterService;
 import me.Kesims.Bank.accounts.services.InterestManagerService;
 import me.Kesims.Bank.accounts.services.MoneyTransferService;
-import me.Kesims.Bank.card.CardCreatorService;
-import me.Kesims.Bank.card.CardInfoPrinterService;
 import me.Kesims.Bank.ui.menu.Menu;
 import me.Kesims.Bank.ui.menu.MenuChoices;
 import me.Kesims.Bank.person.Person;
@@ -128,7 +125,7 @@ public class Bank {
         this.accountInfoPrinterService.printAccountBalance(accountThree);
         System.out.println();
 
-        BaseCard card1 = this.cardCreatorService.createCardAndSetIntoAccount(accountOne);
+        BaseCard card1 = this.cardCreatorService.createCardAndSetIntoAccount(CardType.BaseCard, accountOne);
 
 
         BaseATM bankomat1 = this.atmFactory.createATM("Bankomat1");

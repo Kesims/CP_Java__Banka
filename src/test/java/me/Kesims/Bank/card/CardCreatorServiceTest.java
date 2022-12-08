@@ -41,7 +41,7 @@ class CardCreatorServiceTest {
     void createCardAndSetIntoAccount() {
         Person p = new Person("A", "B", 0);
         BaseAccount a = new BaseAccount("X", p , 0);
-        BaseCard c = cardCreatorService.createCardAndSetIntoAccount(a);
+        BaseCard c = cardCreatorService.createCardAndSetIntoAccount(CardType.BaseCard, a);
 
         assertTrue(cardStorageService.cardList.contains(c));
         assertTrue(c.getAccount().getAccountCards().contains(c));
