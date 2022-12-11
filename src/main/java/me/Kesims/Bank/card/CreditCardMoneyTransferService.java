@@ -5,7 +5,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class CreditCardMoneyTransferService {
     public boolean withdrawFromCreditCard(CreditCard card, float amount) {
-        if((card.getBalanceLimit()-card.getUsedBalance()) < amount) {
+        if((card.getBalanceLimit()-card.getUsedBalance()) > amount) {
             card.setUsedBalance(card.getUsedBalance() + amount);
             return true;
         }

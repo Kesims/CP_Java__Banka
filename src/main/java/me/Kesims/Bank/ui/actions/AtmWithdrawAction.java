@@ -5,6 +5,7 @@ import me.Kesims.Bank.atms.ATMFactory;
 import me.Kesims.Bank.atms.ATMInteractionService;
 import me.Kesims.Bank.atms.ATMStorageService;
 import me.Kesims.Bank.atms.BaseATM;
+import me.Kesims.Bank.card.BaseCard;
 import me.Kesims.Bank.card.CardStorageService;
 import me.Kesims.Bank.person.Person;
 import me.Kesims.Bank.ui.cmd.ScannerService;
@@ -36,8 +37,13 @@ public class AtmWithdrawAction implements Action {
         String cardNumber = scanner.readString();
         System.out.print(" :: Enter amount you would like to withdraw: ");
         float amount = scanner.readFloat();
+        BaseCard card = cardStorageService.findCard(cardNumber);
+        if (card == null) {
+            System.out.println("--- Action failed, card not found! -------------");
+            return;
+        }
         try {
-            baseATM.injectCard(cardStorageService.findCard(cardNumber));
+            baseATM.injectCard(card);
         }
         catch (Exception e) {
             System.out.println("--- Could not inject card into ATM! ------------");

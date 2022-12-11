@@ -138,5 +138,8 @@ public class Bank {
         try {
             bankomat1.ejectCard();
         } catch(Exception ignored) {}
+
+        BaseCard card2 = cardCreatorService.createCardAndSetIntoAccount(CardType.CreditCard, accountOne, 25000.0f);
+        BaseCard card3 = cardCreatorService.createCardAndSetIntoAccount(CardType.BaseCard, accountTwo);
     }
 }

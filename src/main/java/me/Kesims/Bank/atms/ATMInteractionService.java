@@ -17,35 +17,42 @@ public class ATMInteractionService {
     @Inject
     CreditCardMoneyTransferService creditCardMoneyTransferService;
 
+    @Inject
+    AtmInfoPrinterService atmInfoPrinterService;
+
     public void printAccountBalanceByCard(BaseATM atm) {
         BaseCard card = atm.getCard();
         if(card == null) {
-            System.out.println("No card inserted in the ATM");
+            atmInfoPrinterService.printNoCardInserted();
             return;
         }
         accountInfoPrinterService.printAccountBalance(card.getAccount());
     }
 
-    public void accountWithdrawMoneyByCard(BaseATM atm, float amount) {
+    public boolean accountWithdrawMoneyByCard(BaseATM atm, float amount) {
         BaseCard card = atm.getCard();
         if(card == null) {
-            System.out.println("No card inserted in the ATM");
-            return;
+            atmInfoPrinterService.printNoCardInserted();
+            return false;
         }
         if (card instanceof CreditCard creditCard) {
             if(creditCardMoneyTransferService.withdrawFromCreditCard(creditCard, amount)) {
-                System.out.println("Money successfully withdrew from the machine!");
+                atmInfoPrinterService.printWithdrawalSuccessful();
+                return true;
             }
             else {
-                System.out.println("The required amount is above your limit.");
+                atmInfoPrinterService.printOverLimit();
+                return false;
             }
         }
         else {
             if(card.getAccount().removeBalance(amount)) {
-                System.out.println("Money successfully withdrew from the machine!");
+                atmInfoPrinterService.printWithdrawalSuccessful();
+                return true;
             }
             else {
-                System.out.println("Balance too low for withdrawal!");
+                atmInfoPrinterService.printAccountBalanceTooLow();
+                return false;
             }
         }
     }

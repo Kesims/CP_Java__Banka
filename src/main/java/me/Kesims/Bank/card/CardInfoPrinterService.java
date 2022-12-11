@@ -8,11 +8,11 @@ import javax.inject.Singleton;
 public class CardInfoPrinterService {
 
     public void printCardInfo(BaseCard card) {
-        System.out.println("Card number: " + card.getCardNumber() + ", expiration: " + card.getExpiration() + ", CVC: " + card.getCvc());
+        System.out.println("Card number: " + card.getCardNumber() + ", expiration: " + card.getExpiration() + ", CVC: " + card.getCvc() + ", type: " + card.getClass().getSimpleName());
     }
 
     public void printAccountCards(BaseAccount account) {
-        System.out.println("-- List of cards linked to account " + account.getAccountNumber() + " --");
+        System.out.println("-- :: List of cards linked to account " + account.getAccountNumber() + " --");
         for(BaseCard card : account.getAccountCards()) {
             printCardInfo(card);
         }
